@@ -18,24 +18,23 @@ describe("generate method should", () => {
         expect(PrimeFactor.generate(4)).toEqual([2,2]);
     });
 
-
-    it("should return a list of prime factors for 6", () => {
+    it("return a list of prime factors for 6", () => {
         expect(PrimeFactor.generate(6)).toEqual([2, 3]);
     });
 
-    it("should return a list of prime factors for 9", () => {
+    it("return a list of prime factors for 9", () => {
         expect(PrimeFactor.generate(9)).toEqual([3, 3]);
     });
 
-    it("should return a list of prime factors for 12", () => {
+    it("return a list of prime factors for 12", () => {
         expect(PrimeFactor.generate(12)).toEqual([2, 2, 3]);
     });
 
-    it("should return a list of prime factors for 15", () => {
+    it("return a list of prime factors for 15", () => {
         expect(PrimeFactor.generate(15)).toEqual([3, 5]);
     });
 
-    it("should return a list of prime factors for 28", () => {
+    it("return a list of prime factors for 28", () => {
         expect(PrimeFactor.generate(28)).toEqual([2, 2, 7]);
     });
 
