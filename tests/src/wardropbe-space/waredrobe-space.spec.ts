@@ -1,16 +1,30 @@
-import {expect, describe, it} from "vitest";
+import {expect, describe, it, beforeEach} from "vitest";
 import {WardrobeSpace} from "../../../src/wardrobe-space/waredrobe-space";
 
-describe("find combination method should", () => {
+describe("WardrobeSpace", () => {
+    let wardrobeSpace: WardrobeSpace;
 
-    it('return unique combination of wardrobe elements that exactly fill the wall', () => {
-        const expected = [
-            [50, 50, 50, 50, 50],
-            [100, 50, 50, 50],
-            [50, 50, 75, 75],
-            [100, 100, 50],
-            [100,75, 75],
-        ];
-        expect(WardrobeSpace.findCombination(250)).toEqual(expected)
-    })
+    beforeEach(() => {
+        wardrobeSpace = new WardrobeSpace();
+    });
+
+    describe("findCombination method should", () => {
+        it('return unique combination of wardrobe elements that exactly fill the wall', () => {
+            const expectedCombinations = [
+                [50, 50, 50, 50, 50],
+                [100, 50, 50, 50],
+                [50, 50, 75, 75],
+                [100, 100, 50],
+                [100, 75, 75],
+            ];
+
+            expect(wardrobeSpace.findCombination(250)).toEqual(expectedCombinations);
+        });
+    });
+
+    describe("findCheapestCombination method should", () => {
+        it('return the cheapest combination of wardrobe elements that exactly fill the wall', () => {
+            expect(wardrobeSpace.findCheapestCombination(250)).toEqual([100, 75, 75]);
+        });
+    });
 });
