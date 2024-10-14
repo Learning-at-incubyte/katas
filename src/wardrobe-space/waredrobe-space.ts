@@ -1,30 +1,26 @@
 export class WardrobeSpace {
+    private readonly elementSizeToPrice = {
+        50: 59,
+        75: 62,
+        100: 90,
+        120: 111
+    }
+    private readonly wardrobeSizes = [50, 75, 100, 120]
 
     public findCombination(wallSize: number): number[][] {
         const combinations: number[][] = []
         const combination = []
-        const wardrobeSizes = [50, 75, 100, 120]
-        this.generateCombination(wardrobeSizes, wallSize, combination, combinations)
+        this.generateCombination(this.wardrobeSizes, wallSize, combination, combinations)
         return this.getUniqueCombinations(combinations);
     }
 
     public findCheapestCombination(wallSize: number): number[] {
-        const elementSizeToPrice = {
-            50: 59,
-            75: 62,
-            100: 90,
-            120: 111
-        }
-        return this.computeCheapestCombination(wallSize, elementSizeToPrice);
-    }
-
-    private computeCheapestCombination(wallSize: number, elementSizeToPrice: { 100: number; 50: number; 75: number; 120: number }) {
         let cheapestCombination: number[] = [];
         let cheapestPrice = Infinity;
         const combinations = this.findCombination(wallSize);
 
         for (const combination of combinations) {
-            const totalPrice = combination.reduce((sum, element) => sum + elementSizeToPrice[element], 0);
+            const totalPrice = combination.reduce((sum, element) => sum + this.elementSizeToPrice[element], 0);
             console.log(`Combination: ${combination}, Price: ${totalPrice}`);
             if (totalPrice < cheapestPrice) {
                 cheapestPrice = totalPrice;
