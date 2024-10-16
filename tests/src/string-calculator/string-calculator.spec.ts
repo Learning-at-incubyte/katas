@@ -26,5 +26,9 @@ describe("StringCalculator", () => {
             expect(stringCalculator.add("1,2,3,4,5,6,7,8,9,10")).toEqual(55);
         })
 
+        it('return sum of number when it has new line in the input', () => {
+            expect(stringCalculator.add('1\n2,3')).toEqual(6)
+        });
+
     })
 });
