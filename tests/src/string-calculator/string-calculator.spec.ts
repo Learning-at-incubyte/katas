@@ -26,8 +26,16 @@ describe("StringCalculator", () => {
             expect(stringCalculator.add("1,2,3,4,5,6,7,8,9,10")).toEqual(55);
         })
 
-        it('return sum of number when it has new line in the input', () => {
+        it('return sum of number when input has new line in it', () => {
             expect(stringCalculator.add('1\n2,3')).toEqual(6)
+        });
+
+        it('return sum of numbers when input has custom delimiter of length 1', () => {
+            expect(stringCalculator.add('//;\n1;2;3')).toEqual(6);
+        });
+
+        it('return sum of numbers when input has custom delimiter of length 2', () => {
+            expect(stringCalculator.add('//**\n1**2**3')).toEqual(6);
         });
 
     })
