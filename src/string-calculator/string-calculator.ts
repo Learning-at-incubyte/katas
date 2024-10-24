@@ -4,8 +4,7 @@ export class StringCalculator {
         if (input.length === 0) return 0
         const {numbersString, delimiter} = this.extractDelimiters(input)
         const validInput = this.getValidInput(numbersString, delimiter)
-        const validNumbers = validInput.split(delimiter).map(Number);
-
+        const validNumbers = validInput.split(delimiter).map(Number).filter(number => number < 1000);
         const negativeNumbers = validNumbers.filter(validNumber => validNumber < 0)
         if (negativeNumbers.length) {
             throw new Error('negative not allowed ' + negativeNumbers.join(','))

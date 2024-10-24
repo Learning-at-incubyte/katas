@@ -42,5 +42,9 @@ describe("StringCalculator", () => {
             expect(() => stringCalculator.add('//;\n-1;2;-4;0')).toThrowError('negative not allowed -1,-4');
         })
 
+        it('number bigger than 1000 should be ignored', () => {
+            expect(stringCalculator.add('2,1002')).toEqual(2);
+        })
+
     })
 });
