@@ -38,5 +38,9 @@ describe("StringCalculator", () => {
             expect(stringCalculator.add('//**\n1**2**3')).toEqual(6);
         });
 
+        it('return throw an exception with message for negative number with negative that was passed', () => {
+            expect(() => stringCalculator.add('//;\n-1;2;-4;0')).toThrowError('negative not allowed -1,-4');
+        })
+
     })
 });

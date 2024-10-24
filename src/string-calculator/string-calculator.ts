@@ -5,6 +5,11 @@ export class StringCalculator {
         const {numbersString, delimiter} = this.extractDelimiters(input)
         const validInput = this.getValidInput(numbersString, delimiter)
         const validNumbers = validInput.split(delimiter).map(Number);
+
+        const negativeNumbers = validNumbers.filter(validNumber => validNumber < 0)
+        if (negativeNumbers.length) {
+            throw new Error('negative not allowed ' + negativeNumbers.join(','))
+        }
         console.log(validNumbers)
         return validNumbers.reduce((acc, number) => acc + number, 0);
     }
