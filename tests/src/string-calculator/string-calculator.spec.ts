@@ -46,5 +46,9 @@ describe("StringCalculator", () => {
             expect(stringCalculator.add('2,1002')).toEqual(2);
         })
 
+        it('return sum of numbers when input has custom delimiter of any length', () => {
+            expect(stringCalculator.add('//[***]\n1***2***3')).toEqual(6);
+        })
+
     })
 });

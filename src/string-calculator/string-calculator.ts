@@ -18,7 +18,12 @@ export class StringCalculator {
         let numbersString = input
         if (input.startsWith('//')) {
             const delimiterEndIndex = input.indexOf('\n')
-            delimiter = input.substring(2, delimiterEndIndex)
+            const delimiterPart = input.substring(2, delimiterEndIndex)
+            if (delimiterPart.startsWith('[') && delimiterPart.endsWith(']')) {
+                delimiter = delimiterPart.slice(1, -1)
+            } else {
+                delimiter = delimiterPart;
+            }
             numbersString = input.substring(delimiterEndIndex + 1)
         }
         return {numbersString, delimiter}
