@@ -7,6 +7,7 @@
     "test": " vitest"
   },
   "devDependencies": {
+    "@types/node": "^22.8.5",
     "vitest": "^2.0.5"
   },
   "keywords": [],
