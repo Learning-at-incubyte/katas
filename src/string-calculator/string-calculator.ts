@@ -1,14 +1,11 @@
 export class StringCalculator {
 
-    add(input: string) {
+    public add(input: string) {
         if (input.length === 0) return 0
         const {numbersString, delimiter} = this.extractDelimiters(input)
         const validInput = this.getValidInput(numbersString, delimiter)
         const validNumbers = validInput.split(delimiter).map(Number).filter(number => number < 1000);
-        const negativeNumbers = validNumbers.filter(validNumber => validNumber < 0)
-        if (negativeNumbers.length) {
-            throw new Error('negative not allowed ' + negativeNumbers.join(','))
-        }
+        this.handleNegativeInput(validNumbers)
         console.log(validNumbers)
         return validNumbers.reduce((acc, number) => acc + number, 0);
     }
@@ -31,5 +28,12 @@ export class StringCalculator {
 
     private getValidInput(input: string, delimiter: string) {
         return input.replace(/\n/g, delimiter);
+    }
+
+    private handleNegativeInput(validNumbers: number[]) {
+        const negativeNumbers = validNumbers.filter(validNumber => validNumber < 0)
+        if (negativeNumbers.length) {
+            throw new Error('negative not allowed ' + negativeNumbers.join(','))
+        }
     }
 }
