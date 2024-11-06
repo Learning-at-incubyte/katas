@@ -1,16 +1,35 @@
 import {expect, describe, it, beforeEach} from "vitest";
 import {PasswordValidator} from "../../../src/password-validation/password-validator";
 
-describe("valid password should", () => {
+describe("Password validator should", () => {
     let passwordValidator: PasswordValidator
 
     beforeEach(() => {
         passwordValidator = new PasswordValidator()
     })
 
-    it.each([['morethan8characters', true], ['less8', false]])('have more than 8 characters', (password: string, isValid: boolean) => {
-        expect(passwordValidator.isValid(password)).toBe(isValid)
+    it('validate that  has 8 character at least ',  ()=> {
+        expect(passwordValidator.isValid('Lm8_')).toBe(false)
     })
 
+    it('validate that password has at least one upper case letter', () => {
+        expect(passwordValidator.isValid('morethan8characters')).toBe(false)
+    })
+
+    it('validate that password has at least one lower case letter', () => {
+        expect(passwordValidator.isValid('MORETHAN8CHARACTERS')).toBe(false)
+    })
+
+    it('validate that password has at least one number in it', ()=>{
+        expect(passwordValidator.isValid('Morethancharacters')).toBe(false)
+    })
+
+    it('validate that password has at least one underscore', ()=>{
+        expect(passwordValidator.isValid('Morethan8characters')).toBe(false)
+    })
+
+    it('validate that password meet all requirement', ()=>{
+        expect(passwordValidator.isValid('Morethan8characters_')).toBe(true)
+    })
 
 });
