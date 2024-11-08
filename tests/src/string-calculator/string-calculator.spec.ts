@@ -48,4 +48,8 @@ describe("string calculator should", () => {
         expect(stringCalculator.add('//[***]\n1***2***3')).toEqual(6);
     })
 
+    it('return sum of number when input has multiple custom delimiter of single length', () => {
+        expect(stringCalculator.add('//[*][%][@]\n1*2%3%3*4@5')).toEqual(18);
+    })
+
 });
