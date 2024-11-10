@@ -1,6 +1,6 @@
 export class MarsRover {
-    private readonly x: number;
-    private readonly y: number;
+    private x: number;
+    private y: number;
     private direction: string
 
     constructor() {
@@ -9,12 +9,14 @@ export class MarsRover {
         this.direction = 'N'
     }
 
-    execute(_command: string) {
-        for (const commandElement of _command) {
+    execute(command: string) {
+        for (const commandElement of command) {
             if (commandElement === 'L') {
                 this.turnLeft()
             } else if (commandElement === 'R') {
                 this.turnRight()
+            } else {
+                this.move()
             }
         }
         return `${this.x}:${this.y}:${this.direction}`
@@ -38,5 +40,22 @@ export class MarsRover {
             'W': 'N'
         }
         this.direction = directionMap[this.direction]
+    }
+
+    private move() {
+        switch (this.direction) {
+            case 'N':
+                this.y = this.y + 1
+                break
+            case 'S':
+                this.y = this.y - 1
+                break
+            case 'E':
+                this.x = this.x + 1
+                break
+            case 'W':
+                this.x = this.x - 1
+                break
+        }
     }
 }
