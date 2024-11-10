@@ -10,4 +10,13 @@ describe('Mars rover should', () => {
     it('start with 0:0:N initially', () => {
         expect(marsRover.execute('')).toBe('0:0:N')
     })
+
+    it.each([
+        ['L', '0:0:W'],
+        ['LL', '0:0:S'],
+        ['LLL', '0:0:E'],
+        ['LLLL', '0:0:N'],
+    ])('rotate to left correctly for command: %s', (turnTo: string, output: string) => {
+        expect(marsRover.execute(turnTo)).toEqual(output)
+    })
 })
