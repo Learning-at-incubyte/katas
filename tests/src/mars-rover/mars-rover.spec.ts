@@ -37,4 +37,13 @@ describe('Mars rover should', () => {
     ])('move correctly for command %s', (command: string, output: string) => {
         expect(marsRover.execute(command)).toEqual(output)
     })
+
+    it.each([
+        ['MMMMMMMMMM', '0:0:N'],
+        ['MMRMMRMMLMMRM', '4:9:S'],
+        ['MMRMMRRMMM', '9:2:W'],
+        ['RMMMMMMMMMMM', '1:0:E']
+    ])('handle wrap around when it reach to the end of the grid', (command: string, output: string) => {
+        expect(marsRover.execute(command)).toEqual(output)
+    })
 })

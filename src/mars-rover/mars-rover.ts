@@ -2,6 +2,7 @@ export class MarsRover {
     private x: number;
     private y: number;
     private direction: string
+    private gridSize = 10;
 
     constructor() {
         this.x = 0
@@ -45,16 +46,16 @@ export class MarsRover {
     private move() {
         switch (this.direction) {
             case 'N':
-                this.y = this.y + 1
+                this.y = (this.y + 1) % this.gridSize
                 break
             case 'S':
-                this.y = this.y - 1
+                this.y = (this.y - 1 + this.gridSize) % this.gridSize
                 break
             case 'E':
-                this.x = this.x + 1
+                this.x = (this.x + 1) % this.gridSize
                 break
             case 'W':
-                this.x = this.x - 1
+                this.x = (this.x - 1 + this.gridSize) % this.gridSize
                 break
         }
     }
