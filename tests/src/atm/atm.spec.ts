@@ -1,14 +1,27 @@
-import {beforeEach, describe, expect, it} from "vitest";
+import {beforeEach, describe, expect, vi, it} from "vitest";
 import {Atm} from "../../../src/atm/atm";
 
 describe("Atm should", () => {
-    let atm :Atm;
-    beforeEach(()=>{
+    let atm: Atm;
+    beforeEach(() => {
         atm = new Atm()
+        vi.spyOn(console, 'log')
     })
 
     it('should be defined', () => {
         expect(atm).toBeDefined()
+    })
+
+    it('withdraw correct amount', () => {
+        const expectedOutPut =
+            '2 bills of 200.\n' +
+            '1 bill of 20.\n' +
+            '1 bill of 10.\n' +
+            '2 coins of 2.'
+
+        atm.withdraw(434)
+
+        expect(console.log).toHaveBeenCalledWith(expectedOutPut)
     })
 
 })
