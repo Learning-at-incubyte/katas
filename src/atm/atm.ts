@@ -21,13 +21,25 @@ export class Atm {
 
         for (const currency of this.currencies) {
             if (amount <= 0) break
-            const count = Math.floor(amount / currency.value)
+            const count = this.getCount(amount, currency)
             if (count) {
-                output.push(`${count} ${count > 1 ? currency.type + 's' : currency.type} of ${currency.value}.`)
-                amount = amount - count * currency.value
+                output.push(this.generateOutput(count, currency));
+                amount = this.updatedAmount(amount, count, currency)
             }
         }
         console.log(output.join('\n'));
     }
 
+
+    private generateOutput(count: number, currency: Currency): string {
+        return `${count} ${count > 1 ? currency.type + 's' : currency.type} of ${currency.value}.`
+    }
+
+    private updatedAmount(amount: number, count: number, currency: Currency): number {
+        return amount - count * currency.value;
+    }
+
+    private getCount(amount: number, currency: Currency): number {
+        return Math.floor(amount / currency.value);
+    }
 }
