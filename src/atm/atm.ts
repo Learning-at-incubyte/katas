@@ -1,19 +1,20 @@
 type Currency = {
     value: number,
-    type: string
+    type: string,
+    quantity: number
 }
 
 export class Atm {
     private currencies: Currency[] = [
-        {value: 500, type: 'bill'},
-        {value: 200, type: 'bill'},
-        {value: 100, type: 'bill'},
-        {value: 50, type: 'bill'},
-        {value: 20, type: 'bill'},
-        {value: 10, type: 'bill'},
-        {value: 5, type: 'bill'},
-        {value: 2, type: 'coin'},
-        {value: 1, type: 'coin'}
+        {value: 500, type: 'bill', quantity: 2},
+        {value: 200, type: 'bill', quantity: 3},
+        {value: 100, type: 'bill', quantity: 5},
+        {value: 50, type: 'bill', quantity: 12},
+        {value: 20, type: 'bill', quantity: 20},
+        {value: 10, type: 'bill', quantity: 50},
+        {value: 5, type: 'bill', quantity: 100},
+        {value: 2, type: 'coin', quantity: 250},
+        {value: 1, type: 'coin', quantity: 500}
     ];
 
     withdraw(amount: number) {
@@ -27,6 +28,10 @@ export class Atm {
                 amount = this.updatedAmount(amount, count, currency)
             }
         }
+
+        if (amount > 0) {
+            throw new Error('The ATM machine has not enough money, please go to the nearest atm machine.');
+        }
         console.log(output.join('\n'));
     }
 
@@ -36,10 +41,11 @@ export class Atm {
     }
 
     private updatedAmount(amount: number, count: number, currency: Currency): number {
+        currency.quantity -= count;
         return amount - count * currency.value;
     }
 
     private getCount(amount: number, currency: Currency): number {
-        return Math.floor(amount / currency.value);
+        return Math.min(currency.quantity, Math.floor(amount / currency.value));
     }
 }

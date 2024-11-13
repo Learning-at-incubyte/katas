@@ -24,4 +24,8 @@ describe("Atm should", () => {
         expect(console.log).toHaveBeenCalledWith(expectedOutPut)
     })
 
+    it('throw an error when the atm machine has not enough money', () => {
+        expect(() => atm.withdraw(10000)).toThrowError('The ATM machine has not enough money, please go to the nearest atm machine.')
+    })
+
 })
