@@ -28,4 +28,21 @@ describe("Atm should", () => {
         expect(() => atm.withdraw(10000)).toThrowError('The ATM machine has not enough money, please go to the nearest atm machine.')
     })
 
+    it('use other quantity if ATM has no more bills or coins', () => {
+        const expectedOutPut =
+            '2 bills of 500.\n' +
+            '3 bills of 200.\n' +
+            '5 bills of 100.\n' +
+            '12 bills of 50.\n' +
+            '20 bills of 20.\n' +
+            '50 bills of 10.\n' +
+            '100 bills of 5.\n' +
+            '250 coins of 2.\n' +
+            '400 coins of 1.';
+
+        atm.withdraw(5000)
+
+        expect(console.log).toHaveBeenCalledWith(expectedOutPut)
+    })
+
 })
