@@ -1,5 +1,4 @@
 import { PasswordValidator } from './password-validator';
-import { PasswordRule } from './password-rule';
 import { LengthRule } from './rules/length-rule';
 import { UppercaseRule } from './rules/uppercase-rule';
 import { LowercaseRule } from './rules/lowercase-rule';
