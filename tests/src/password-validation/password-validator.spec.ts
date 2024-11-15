@@ -11,6 +11,7 @@ describe('Password validator should', () => {
             .addUppercaseRule()
             .addLowercaseRule()
             .addUnderscoreRule()
+            .addNumberRule()
             .build();
     });
 
@@ -19,15 +20,15 @@ describe('Password validator should', () => {
     });
 
     it('validate that password has at least one upper case letter', () => {
-        expect(passwordValidator.isValid('morethan8characters')).toBe(false);
+        expect(passwordValidator.isValid('morethan8characters_')).toBe(false);
     });
 
     it('validate that password has at least one lower case letter', () => {
-        expect(passwordValidator.isValid('MORETHAN8CHARACTERS')).toBe(false);
+        expect(passwordValidator.isValid('MORETHAN8CHARACTERS8_')).toBe(false);
     });
 
     it('validate that password has at least one number in it', () => {
-        expect(passwordValidator.isValid('Morethancharacters')).toBe(false);
+        expect(passwordValidator.isValid('Morethancharacters_')).toBe(false);
     });
 
     it('validate that password has at least one underscore', () => {

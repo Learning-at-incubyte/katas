@@ -1,4 +1,3 @@
-
 import { PasswordRule } from '../password-rule';
 
 export class NumberRule implements PasswordRule {
