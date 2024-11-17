@@ -1,41 +1,59 @@
-import {expect, describe, it, beforeEach} from 'vitest';
-import {PasswordValidatorBuilder} from '../../../src/password-validation/password-validator-builder';
+import {expect, describe, it, vi, beforeEach} from 'vitest';
 import {PasswordValidator} from "../../../src/password-validation/password-validator";
+import * as passwordBuilder from "../../../src/password-validation/password-validator-builder";
 
 describe('Password validator should', () => {
-    let passwordValidator: PasswordValidator;
+    let addLengthRuleSpy;
+    let addUppercaseRuleSpy;
+    let addLowercaseRuleSpy;
+    let addNumberRuleSpy;
+    let addUnderscoreRuleSpy;
 
     beforeEach(() => {
-        passwordValidator = new PasswordValidatorBuilder()
-            .addLengthRule(8)
-            .addUppercaseRule()
-            .addLowercaseRule()
-            .addUnderscoreRule()
-            .addNumberRule()
-            .build();
+        addLengthRuleSpy = vi.spyOn(passwordBuilder.PasswordValidatorBuilder.prototype, 'addLengthRule');
+        addUppercaseRuleSpy = vi.spyOn(passwordBuilder.PasswordValidatorBuilder.prototype, 'addUppercaseRule');
+        addLowercaseRuleSpy = vi.spyOn(passwordBuilder.PasswordValidatorBuilder.prototype, 'addLowercaseRule');
+        addNumberRuleSpy = vi.spyOn(passwordBuilder.PasswordValidatorBuilder.prototype, 'addNumberRule');
+        addUnderscoreRuleSpy = vi.spyOn(passwordBuilder.PasswordValidatorBuilder.prototype, 'addUnderscoreRule');
+    })
+
+    it.each([
+        ['Morethan8char_', true],
+        ['wrong', false]
+    ])(`validate password: %s with length 8, uppercase, lowercase, underscore, and number`, (password: string, isValid: boolean) => {
+        const result = new PasswordValidator().checkValidation1(password);
+
+        expect(result).toBe(isValid);
+        expect(addLengthRuleSpy).toBeCalled();
+        expect(addUppercaseRuleSpy).toBeCalled();
+        expect(addLowercaseRuleSpy).toBeCalled();
+        expect(addNumberRuleSpy).toBeCalled();
+        expect(addUnderscoreRuleSpy).toBeCalled();
     });
 
-    it('validate that password has 8 characters at least', () => {
-        expect(passwordValidator.isValid('Lm8_')).toBe(false);
+    it.each([
+        ['Morethan6char', true],
+        ['wrong', false]
+    ])('validate password with length 6, uppercase, lowercase, and number', (password: string, isValid: boolean) => {
+        const result = new PasswordValidator().checkValidation2(password);
+        expect(result).toBe(isValid);
+        expect(addLengthRuleSpy).toBeCalled();
+        expect(addUppercaseRuleSpy).toBeCalled();
+        expect(addLowercaseRuleSpy).toBeCalled();
+        expect(addNumberRuleSpy).toBeCalled();
     });
 
-    it('validate that password has at least one upper case letter', () => {
-        expect(passwordValidator.isValid('morethan8characters_')).toBe(false);
+    it.each([
+        ['ThereAreMorethan16charInThisPassword_', true],
+        ['wrong', false]
+    ])('validate password with length 16, uppercase, and lowercase', (password: string, isValid: boolean) => {
+        const result = new PasswordValidator().checkValidation3(password);
+
+        expect(result).toBe(isValid);
+        expect(addLengthRuleSpy).toBeCalled();
+        expect(addUppercaseRuleSpy).toBeCalled();
+        expect(addLowercaseRuleSpy).toBeCalled();
+        expect(addUnderscoreRuleSpy).toBeCalled();
     });
 
-    it('validate that password has at least one lower case letter', () => {
-        expect(passwordValidator.isValid('MORETHAN8CHARACTERS8_')).toBe(false);
-    });
-
-    it('validate that password has at least one number in it', () => {
-        expect(passwordValidator.isValid('Morethancharacters_')).toBe(false);
-    });
-
-    it('validate that password has at least one underscore', () => {
-        expect(passwordValidator.isValid('Morethan8characters')).toBe(false);
-    });
-
-    it('validate that password meets all requirements', () => {
-        expect(passwordValidator.isValid('Morethan8characters_')).toBe(true);
-    });
 });
