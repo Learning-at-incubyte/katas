@@ -8,10 +8,10 @@ describe('under score rule should', () => {
     })
 
     it('return false if password has no underscore', () => {
-        expect(underscoreRule.validate('ABCDe')).toBe(false)
+        expect(underscoreRule.validate('ABCDe').status).toBe(false)
     });
 
     it('return true if password has at least one underscore', () => {
-        expect(underscoreRule.validate('ABCd8_')).toBe(true)
+        expect(underscoreRule.validate('ABCd8_').status).toBe(true)
     });
 })

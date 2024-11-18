@@ -8,10 +8,10 @@ describe('number rule should', () => {
     })
 
     it('return false if password has no number', () => {
-        expect(numberRule.validate('ABCDe')).toBe(false)
+        expect(numberRule.validate('ABCDe').status).toBe(false)
     });
 
     it('return true if password has at least one number', () => {
-        expect(numberRule.validate('ABCd8')).toBe(true)
+        expect(numberRule.validate('ABCd8').status).toBe(true)
     });
 })

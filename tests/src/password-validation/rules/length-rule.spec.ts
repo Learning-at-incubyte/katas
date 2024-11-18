@@ -9,14 +9,14 @@ describe('length rule should', () => {
     })
 
     it('return false if password length is less than minimum length', () => {
-        expect(lengthRule.validate('abcdefgh')).toBe(false)
+        expect(lengthRule.validate('abcdefgh').status).toBe(false)
     });
 
     it('return true if password length is more than minimum length', () => {
-        expect(lengthRule.validate('abcdefghik')).toBe(true)
+        expect(lengthRule.validate('abcdefghik').status).toBe(true)
     });
 
     it('return false if password length is same as minimum length', () => {
-        expect(lengthRule.validate('abcdefghi')).toBe(false)
+        expect(lengthRule.validate('abcdefghi').status).toBe(false)
     });
 })

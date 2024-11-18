@@ -8,10 +8,10 @@ describe('upper case rule should', () => {
     })
 
     it('return false if password has no uppercase', () => {
-        expect(uppercaseRule.validate('abcdef')).toBe(false)
+        expect(uppercaseRule.validate('abcdef').status).toBe(false)
     });
 
     it('return true if password has at least one uppercase', () => {
-        expect(uppercaseRule.validate('ABCd8')).toBe(true)
+        expect(uppercaseRule.validate('ABCd8').status).toBe(true)
     });
 })

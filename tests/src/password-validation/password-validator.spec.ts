@@ -18,17 +18,23 @@ describe('Password validator should', () => {
     })
 
     it.each([
-        ['Morethan8char_', true],
-        ['wrong', false]
-    ])(`validate password: %s with length 8, uppercase, lowercase, underscore, and number`, (password: string, isValid: boolean) => {
-        const result = new PasswordValidator().checkValidation1(password);
+        // ['Morethan8char_', true, []],/
+        ['wrong', false, [
+            'Password does not have minimum length 8',
+            'Password does not have uppercase letter',
+            'Password does not have lowercase letter',
+            'Password does not have number',
+            'Password does not have underscore']]
+    ])(`validate password: %s with length 8, uppercase, lowercase, underscore, and number`, (password: string, isValid: boolean, expectedReason: string[]) => {
+        const {status, reason} = new PasswordValidator().checkValidation1(password);
 
-        expect(result).toBe(isValid);
+        expect(status).toBe(isValid);
         expect(addLengthRuleSpy).toBeCalled();
         expect(addUppercaseRuleSpy).toBeCalled();
         expect(addLowercaseRuleSpy).toBeCalled();
         expect(addNumberRuleSpy).toBeCalled();
         expect(addUnderscoreRuleSpy).toBeCalled();
+        expect(reason).toEqual(expectedReason);
     });
 
     it.each([
