@@ -8,10 +8,10 @@ describe('lower case rule should', () => {
     })
 
     it('return false if password has no lower case', () => {
-        expect(lowercaseRule.validate('ABCD')).toBe(false)
+        expect(lowercaseRule.validate('ABCD').status).toBe(false)
     });
 
     it('return true if password has at least one lower case', () => {
-        expect(lowercaseRule.validate('ABCd')).toBe(true)
+        expect(lowercaseRule.validate('ABCd').status).toBe(true)
     });
 })

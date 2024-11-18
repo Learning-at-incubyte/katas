@@ -3,19 +3,22 @@ import {PasswordValidatorBuilder} from "./password-validator-builder";
 
 export class PasswordValidator {
     public rules: PasswordRule[] = [];
+    public reasonOfFailure: string[] = [];
 
     addRule(rule: PasswordRule): void {
         this.rules.push(rule);
     }
 
-    checkValidation1(password: string): boolean {
-        return new PasswordValidatorBuilder()
+    checkValidation1(password: string): { status: boolean, reason: string[] } {
+        const isValid = new PasswordValidatorBuilder()
             .addLengthRule(8)
             .addUppercaseRule()
             .addLowercaseRule()
             .addUnderscoreRule()
             .addNumberRule()
             .build().isValid(password);
+
+        return {status: isValid, reason: this.reasonOfFailure};
     }
 
     checkValidation2(password: string): boolean {
@@ -36,7 +39,13 @@ export class PasswordValidator {
             .build().isValid(password);
     }
 
-    isValid(password: string): boolean {
-        return this.rules.every(rule => rule.validate(password));
+    private isValid(password: string): boolean {
+        for (const rule of this.rules) {
+            const {status, reason} = rule.validate(password);
+            if (!status) {
+                this.reasonOfFailure.push(reason);
+            }
+        }
+        return this.reasonOfFailure.length <= 0;
     }
-}
+}``

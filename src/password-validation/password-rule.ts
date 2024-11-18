@@ -1,3 +1,3 @@
 export interface PasswordRule {
-    validate(password: string): boolean;
+    validate(password: string): { status: boolean, reason: string };
 }
