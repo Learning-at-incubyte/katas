@@ -48,4 +48,4 @@ export class PasswordValidator {
         }
         return this.reasonOfFailure.length <= 0;
     }
-}``
+}
