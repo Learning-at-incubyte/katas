@@ -18,13 +18,14 @@ describe('Password validator should', () => {
     })
 
     it.each([
-        // ['Morethan8char_', true, []],/
+        ['Morethan8char_', true, []],
         ['wrong', false, [
             'Password does not have minimum length 8',
             'Password does not have uppercase letter',
-            'Password does not have lowercase letter',
+            'Password does not have underscore',
             'Password does not have number',
-            'Password does not have underscore']]
+        ]],
+        ['WRONGPASSOWRD_8', false, ['Password does not have lowercase letter',]],
     ])(`validate password: %s with length 8, uppercase, lowercase, underscore, and number`, (password: string, isValid: boolean, expectedReason: string[]) => {
         const {status, reason} = new PasswordValidator().checkValidation1(password);
 
@@ -38,28 +39,38 @@ describe('Password validator should', () => {
     });
 
     it.each([
-        ['Morethan6char', true],
-        ['wrong', false]
-    ])('validate password with length 6, uppercase, lowercase, and number', (password: string, isValid: boolean) => {
-        const result = new PasswordValidator().checkValidation2(password);
-        expect(result).toBe(isValid);
+        ['Morethan6char', true, []],
+        ['wrong', false, [
+            'Password does not have minimum length 6',
+            'Password does not have uppercase letter',
+            'Password does not have number'
+        ]],
+    ])('validate password with length 6, uppercase, lowercase, and number', (password: string, isValid: boolean, expectedReason: string[]) => {
+        const {status, reason} = new PasswordValidator().checkValidation2(password);
+        expect(status).toBe(isValid);
         expect(addLengthRuleSpy).toBeCalled();
         expect(addUppercaseRuleSpy).toBeCalled();
         expect(addLowercaseRuleSpy).toBeCalled();
         expect(addNumberRuleSpy).toBeCalled();
+        expect(reason).toEqual(expectedReason);
     });
 
     it.each([
-        ['ThereAreMorethan16charInThisPassword_', true],
-        ['wrong', false]
-    ])('validate password with length 16, uppercase, and lowercase', (password: string, isValid: boolean) => {
-        const result = new PasswordValidator().checkValidation3(password);
+        ['ThereAreMorethan16charInThisPassword_', true, []],
+        ['wrong', false, [
+            "Password does not have minimum length 16",
+            "Password does not have uppercase letter",
+            "Password does not have underscore"
+        ]]
+    ])('validate password with length 16, uppercase, and lowercase', (password: string, isValid: boolean, expectedReason: string[]) => {
+        const {status,reason} = new PasswordValidator().checkValidation3(password);
 
-        expect(result).toBe(isValid);
+        expect(status).toBe(isValid);
         expect(addLengthRuleSpy).toBeCalled();
         expect(addUppercaseRuleSpy).toBeCalled();
         expect(addLowercaseRuleSpy).toBeCalled();
         expect(addUnderscoreRuleSpy).toBeCalled();
+        expect(reason).toEqual(expectedReason);
     });
 
 });

@@ -10,33 +10,46 @@ export class PasswordValidator {
     }
 
     checkValidation1(password: string): { status: boolean, reason: string[] } {
-        const isValid = new PasswordValidatorBuilder()
+        const validator = new PasswordValidatorBuilder()
             .addLengthRule(8)
             .addUppercaseRule()
             .addLowercaseRule()
             .addUnderscoreRule()
             .addNumberRule()
-            .build().isValid(password);
+            .build()
+
+        const isValid = validator.isValid(password);
+        this.reasonOfFailure = validator.reasonOfFailure;
 
         return {status: isValid, reason: this.reasonOfFailure};
     }
 
-    checkValidation2(password: string): boolean {
-        return new PasswordValidatorBuilder()
+    checkValidation2(password: string): { status: boolean, reason: string[] } {
+        const validator = new PasswordValidatorBuilder()
             .addLengthRule(6)
             .addUppercaseRule()
             .addLowercaseRule()
             .addNumberRule()
-            .build().isValid(password);
+            .build()
+
+        const isValid = validator.isValid(password);
+        this.reasonOfFailure = validator.reasonOfFailure;
+
+        return {status: isValid, reason: this.reasonOfFailure};
     }
 
-    checkValidation3(password: string): boolean {
-        return new PasswordValidatorBuilder()
+    checkValidation3(password: string): { status: boolean, reason: string[] } {
+        const validator = new PasswordValidatorBuilder()
             .addLengthRule(16)
             .addUppercaseRule()
             .addLowercaseRule()
             .addUnderscoreRule()
-            .build().isValid(password);
+            .build()
+
+        const isValid = validator.isValid(password);
+        this.reasonOfFailure = validator.reasonOfFailure;
+
+        return {status: isValid, reason: this.reasonOfFailure};
     }
 
     private isValid(password: string): boolean {
@@ -46,6 +59,6 @@ export class PasswordValidator {
                 this.reasonOfFailure.push(reason);
             }
         }
-        return this.reasonOfFailure.length <= 0;
+        return this.reasonOfFailure.length === 0;
     }
 }
