@@ -8,4 +8,6 @@ export class Item {
         this.sellIn = sellIn;
         this.quality = quality;
     }
+
+    updateQuality() {}
 }
