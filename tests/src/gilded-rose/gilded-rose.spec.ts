@@ -1,5 +1,6 @@
-import { GildedRose, Item } from "../../../src/gilded-rose/gilded-rose";
+import { GildedRose } from "../../../src/gilded-rose/gilded-rose";
 import { expect, describe, it } from "vitest";
+import {Item} from "../../../src/gilded-rose/Items";
 
 describe('Gilded Rose should', () => {
     it('decrease sellIn and quality for normal items', () => {
