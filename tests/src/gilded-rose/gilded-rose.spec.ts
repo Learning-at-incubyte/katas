@@ -1,10 +1,10 @@
 import { GildedRose } from "../../../src/gilded-rose/gilded-rose";
 import { expect, describe, it } from "vitest";
-import {Item} from "../../../src/gilded-rose/items/items";
 import {NormalItem} from "../../../src/gilded-rose/items/normal-item";
 import {AgedBrie} from "../../../src/gilded-rose/items/aged-brie";
 import {Sulfuras} from "../../../src/gilded-rose/items/sulfuras";
 import {BackstagePasses} from "../../../src/gilded-rose/items/backstage-passes";
+import {Conjured} from "../../../src/gilded-rose/items/conjured";
 
 describe('Gilded Rose should', () => {
     it('decrease sellIn and quality for normal items', () => {
@@ -62,4 +62,11 @@ describe('Gilded Rose should', () => {
         expect(items[0].sellIn).toBe(9);
         expect(items[0].quality).toBe(50);
     });
+
+    it('decrease quality double of normal items for Conjured items', () => {
+        const gildedRose = new GildedRose([new Conjured('conjured', 10, 20)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).toBe(9);
+        expect(items[0].quality).toBe(18);
+    })
 });
