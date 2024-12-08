@@ -11,9 +11,9 @@ export class Item {
 
     updateQuality() {
         this.decreaseSellIn()
-        this.decreaseQuality()
+        this.decreaseQualityBy()
         if (this.sellIn < 0) {
-            this.decreaseQuality()
+            this.decreaseQualityBy()
         }
     }
 
@@ -21,9 +21,15 @@ export class Item {
         this.sellIn--
     }
 
-    decreaseQuality() {
+    decreaseQualityBy(quantity: number = 1) {
         if (this.quality > 0) {
-            this.quality--
+            this.quality-= quantity
+        }
+    }
+
+    increaseQualityBy(quality: number = 1) {
+        if (this.quality < 50) {
+            this.quality += quality
         }
     }
 
