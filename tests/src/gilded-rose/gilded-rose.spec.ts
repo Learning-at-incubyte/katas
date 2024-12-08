@@ -22,9 +22,9 @@ describe('Gilded Rose should', () => {
     });
 
     it('not change quality or sellIn for Sulfuras', () => {
-        const gildedRose = new GildedRose([new Sulfuras('Sulfuras, Hand of Ragnaros', 10, 80)]);
+        const gildedRose = new GildedRose([new Sulfuras()]);
         const items = gildedRose.updateQuality();
-        expect(items[0].sellIn).toBe(10);
+        expect(items[0].sellIn).toBe(0);
         expect(items[0].quality).toBe(80);
     });
 
