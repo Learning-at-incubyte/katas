@@ -1,4 +1,4 @@
-import {Item} from "./items/Items";
+import {Item} from "./items/items";
 
 export class GildedRose {
     items: Item[];

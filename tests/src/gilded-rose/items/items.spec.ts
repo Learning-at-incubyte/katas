@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {Item} from "../../../../src/gilded-rose/items/Items";
+import {Item} from "../../../../src/gilded-rose/items/items";
 
 describe('items should', () => {
     it('be defined', () => {
