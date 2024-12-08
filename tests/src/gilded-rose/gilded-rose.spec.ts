@@ -1,14 +1,14 @@
 import { GildedRose } from "../../../src/gilded-rose/gilded-rose";
 import { expect, describe, it } from "vitest";
-import {NormalItem} from "../../../src/gilded-rose/items/normal-item";
 import {AgedBrie} from "../../../src/gilded-rose/items/aged-brie";
 import {Sulfuras} from "../../../src/gilded-rose/items/sulfuras";
 import {BackstagePasses} from "../../../src/gilded-rose/items/backstage-passes";
 import {Conjured} from "../../../src/gilded-rose/items/conjured";
+import {Item} from "../../../src/gilded-rose/items/items";
 
 describe('Gilded Rose should', () => {
     it('decrease sellIn and quality for normal items', () => {
-        const gildedRose = new GildedRose([new NormalItem('normal', 10, 20)]);
+        const gildedRose = new GildedRose([new Item('normal', 10, 20)]);
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).toBe(9);
         expect(items[0].quality).toBe(19);
@@ -50,7 +50,7 @@ describe('Gilded Rose should', () => {
     });
 
     it('not decrease quality below 0', () => {
-        const gildedRose = new GildedRose([new NormalItem('normal', 10, 0)]);
+        const gildedRose = new GildedRose([new Item('normal', 10, 0)]);
         const items = gildedRose.updateQuality();
         expect(items[0].sellIn).toBe(9);
         expect(items[0].quality).toBe(0);
