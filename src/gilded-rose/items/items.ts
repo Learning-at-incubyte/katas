@@ -1,10 +1,8 @@
 export class Item {
-    name: string;
     sellIn: number;
     quality: number;
 
-    constructor(name: string, sellIn: number, quality: number) {
-        this.name = name;
+    constructor(sellIn: number, quality: number) {
         this.sellIn = sellIn;
         this.quality = quality;
     }
