@@ -1,12 +1,12 @@
 import {Item} from "./items";
-import {FIX_QUALITY_OF_SULFURAS} from "./constant";
+import {FIX_QUALITY_OF_SULFURAS, MIN_SELL_IN} from "./constant";
 
 export class Sulfuras extends Item {
     constructor() {
-        super(0, FIX_QUALITY_OF_SULFURAS);
+        super(MIN_SELL_IN, FIX_QUALITY_OF_SULFURAS);
     }
+
     updateQuality() {
         // Sulfuras never has to be sold or decreases in Quality
     }
-
 }

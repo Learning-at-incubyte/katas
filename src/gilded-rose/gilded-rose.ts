@@ -8,8 +8,8 @@ export class GildedRose {
     }
 
     updateQuality() {
-        for (let i = 0; i < this.items.length; i++) {
-            this.items[i].updateQuality();
+        for (const item of this.items) {
+            item.updateQuality();
         }
         return this.items;
     }
