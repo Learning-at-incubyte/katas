@@ -1,18 +1,19 @@
 import {Item} from "./items";
+import {MAX_QUALITY, MIN_QUALITY, MIN_SELL_IN} from "./constant";
 
 export class BackstagePasses extends Item {
 
     updateQuality() {
         this.decreaseSellIn()
-        if (this.quality < 50) {
+        if (this.quality < MAX_QUALITY) {
             if (this.sellIn <= 10 && this.sellIn > 5) {
                 this.increaseQualityBy(2)
-            } else if (this.sellIn <= 5 && this.sellIn >= 0) {
+            } else if (this.sellIn <= 5 && this.sellIn >= MIN_SELL_IN) {
                 this.increaseQualityBy(3)
             }
         }
-        if (this.sellIn < 0) {
-            this.quality = 0
+        if (this.sellIn < MIN_SELL_IN) {
+            this.quality = MIN_QUALITY
         }
     }
 }

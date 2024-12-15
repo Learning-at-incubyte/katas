@@ -1,3 +1,5 @@
+import {MAX_QUALITY, MIN_QUALITY, MIN_SELL_IN} from "./constant";
+
 export class Item {
     sellIn: number;
     quality: number;
@@ -10,7 +12,7 @@ export class Item {
     updateQuality() {
         this.decreaseSellIn()
         this.decreaseQualityBy()
-        if (this.sellIn < 0) {
+        if (this.sellIn < MIN_SELL_IN) {
             this.decreaseQualityBy()
         }
     }
@@ -20,13 +22,13 @@ export class Item {
     }
 
     decreaseQualityBy(quantity: number = 1) {
-        if (this.quality > 0) {
+        if (this.quality > MIN_QUALITY) {
             this.quality-= quantity
         }
     }
 
     increaseQualityBy(quality: number = 1) {
-        if (this.quality < 50) {
+        if (this.quality < MAX_QUALITY) {
             this.quality += quality
         }
     }
