@@ -1,4 +1,4 @@
-import {MAX_QUALITY, MIN_QUALITY, MIN_SELL_IN} from "./constant";
+import {DEFAULT_QUALITY_CHANGE, MAX_QUALITY, MIN_QUALITY, MIN_SELL_IN} from "./constant";
 
 export class Item {
     sellIn: number;
@@ -21,13 +21,13 @@ export class Item {
         this.sellIn--
     }
 
-    decreaseQualityBy(quantity: number = 1) {
+    decreaseQualityBy(quantity: number = DEFAULT_QUALITY_CHANGE) {
         if (this.quality > MIN_QUALITY) {
             this.quality-= quantity
         }
     }
 
-    increaseQualityBy(quality: number = 1) {
+    increaseQualityBy(quality: number = DEFAULT_QUALITY_CHANGE) {
         if (this.quality < MAX_QUALITY) {
             this.quality += quality
         }
