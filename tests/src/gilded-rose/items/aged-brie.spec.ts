@@ -2,7 +2,7 @@ import {describe, it, expect} from "vitest";
 import {AgedBrie} from "../../../../src/gilded-rose/items/aged-brie";
 
 describe('aged brie item should', () => {
-    it('decrease sellIn by 1 before sell date', () => {
+    it('decrease sellIn by 1', () => {
         const item = new AgedBrie(10, 20);
         item.updateQuality();
         expect(item.sellIn).toBe(9);
@@ -12,11 +12,5 @@ describe('aged brie item should', () => {
         const item = new AgedBrie(0, 20);
         item.updateQuality()
         expect(item.quality).toBe(21);
-    });
-
-    it('not increase quality beyond 50', () => {
-        const item = new AgedBrie(10, 50);
-        item.updateQuality()
-        expect(item.quality).toBe(50)
     });
 });

@@ -19,16 +19,4 @@ describe('backstage passed item should', () => {
         item.updateQuality()
         expect(item.quality).toBe(13)
     })
-
-    it('drop the quality to 0 when sellIn days are less than 0', () => {
-        const item = new BackstagePasses(0, 10);
-        item.updateQuality()
-        expect(item.quality).toBe(0)
-    })
-
-    it('not increase quality beyond 50', () => {
-        const item = new BackstagePasses(10, 50);
-        item.updateQuality()
-        expect(item.quality).toBe(50)
-    });
 });

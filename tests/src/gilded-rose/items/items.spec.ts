@@ -2,7 +2,6 @@ import {describe, it, expect} from "vitest";
 import {Item} from "../../../../src/gilded-rose/items/items";
 
 describe('items should', () => {
-
     it('be defined', () => {
         const item = new Item(2, 5);
         expect(item).toBeDefined();
@@ -10,7 +9,7 @@ describe('items should', () => {
         expect(item.quality).toBe(5);
     })
 
-    it('decrease sellIn day by 1 before sell date', () => {
+    it('decrease sellIn day by 1', () => {
         const item = new Item( 10, 20);
         item.updateQuality();
         expect(item.sellIn).toBe(9);
@@ -35,4 +34,21 @@ describe('items should', () => {
         expect(item.quality).toBe(0);
     });
 
+    it('not increase quality above 50', ()=>{
+        const item = new Item(10, 50);
+        item.increaseQualityBy();
+        expect(item.quality).toBe(50);
+    })
+
+    it('not set quality to minimum if sellIn date is not passed', ()=>{
+        const item = new Item(10, 1);
+        item.setQualityToMinimum();
+        expect(item.quality).toBe(1);
+    })
+
+    it('set quality to minimum if sellIn date is passed', ()=>{
+        const item = new Item(-1, 1);
+        item.setQualityToMinimum();
+        expect(item.quality).toBe(0);
+    })
 });

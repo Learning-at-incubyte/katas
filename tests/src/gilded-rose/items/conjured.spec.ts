@@ -19,11 +19,4 @@ describe('conjured item should', () => {
         item.updateQuality();
         expect(item.quality).toBe(16);
     });
-
-    it('not decrease quality below 0', () => {
-        const item = new Conjured( 10, 1);
-        item.updateQuality();
-        expect(item.sellIn).toBe(9);
-        expect(item.quality).toBe(0);
-    });
 });
