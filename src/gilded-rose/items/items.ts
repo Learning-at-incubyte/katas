@@ -34,8 +34,12 @@ export class Item {
     }
 
     setQualityToMinimum() {
-        if (this.sellIn < MIN_SELL_IN) {
-            this.quality = MIN_QUALITY
+        this.quality = MIN_QUALITY
+    }
+
+    setQualityToMaximum() {
+        if (this.quality > MAX_QUALITY) {
+            this.quality = MAX_QUALITY
         }
     }
 }
