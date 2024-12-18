@@ -5,9 +5,11 @@ export class Conjured extends Item {
     updateQuality() {
         this.decreaseSellIn()
         this.decreaseQualityBy(QUALITY_CHANGE_DOUBLE)
-        if (this.sellIn < MIN_SELL_IN && this.quality > MIN_QUALITY) {
+        if (this.sellIn < MIN_SELL_IN) {
             this.decreaseQualityBy(QUALITY_CHANGE_DOUBLE)
         }
-        this.setQualityToMinimum()
+        if (this.quality < MIN_QUALITY) {
+            this.setQualityToMinimum()
+        }
     }
 }

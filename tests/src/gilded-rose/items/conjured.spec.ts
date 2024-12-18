@@ -2,7 +2,7 @@ import {describe, it, expect} from "vitest";
 import {Conjured} from "../../../../src/gilded-rose/items/conjured";
 
 describe('conjured item should', () => {
-    it('decrease sellIn by 1 before sell date', () => {
+    it('decrease sellIn by 1', () => {
         const item = new Conjured(10, 20);
         item.updateQuality();
         expect(item.sellIn).toBe(9);
@@ -19,4 +19,10 @@ describe('conjured item should', () => {
         item.updateQuality();
         expect(item.quality).toBe(16);
     });
+
+    it('not decrease quality below 0', () => {
+        const item = new Conjured(10, 0);
+        item.updateQuality();
+        expect(item.quality).toBe(0);
+    })
 });
