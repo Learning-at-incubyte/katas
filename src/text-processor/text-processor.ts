@@ -2,6 +2,6 @@ export  class TextProcessor{
 
 
     processText(text: string) {
-        return text.split(' ').length
+        return text.match(/[a-z]+/g).length
     }
 }
