@@ -16,4 +16,12 @@ describe('text processor', ()=>{
 
         expect(result).toBe(3)
     })
+
+    it('ignore punctuation from the text while counting total words', ()=>{
+        const text = "hello, good morning !"
+
+        const result = textProcessor.processText(text)
+
+        expect(result).toBe(3)
+    })
 })
