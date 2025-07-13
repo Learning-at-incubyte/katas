@@ -24,4 +24,16 @@ describe('text processor', ()=>{
 
         expect(result).toBe(3)
     })
+
+    it('count frequency of word from the text', ()=>{
+        const text = "hello, good morning vijay, good morning ajay"
+
+        const result = textProcessor.processText(text)
+
+        expect(result.wordsCountMap.get('hello')).toBe(1)
+        expect(result.wordsCountMap.get('good')).toBe(2)
+        expect(result.wordsCountMap.get('morning')).toBe(2)
+        expect(result.wordsCountMap.get('vijay')).toBe(1)
+        expect(result.wordsCountMap.get('ajay')).toBe(1)
+    })
 })
