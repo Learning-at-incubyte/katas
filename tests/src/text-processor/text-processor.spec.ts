@@ -14,7 +14,7 @@ describe('text processor', ()=>{
 
         const result = textProcessor.processText(text)
 
-        expect(result).toBe(3)
+        expect(result.totalWords).toBe(3)
     })
 
     it('ignore punctuation from the text while counting total words', ()=>{
@@ -22,7 +22,7 @@ describe('text processor', ()=>{
 
         const result = textProcessor.processText(text)
 
-        expect(result).toBe(3)
+        expect(result.totalWords).toBe(3)
     })
 
     it('count frequency of word from the text', ()=>{
